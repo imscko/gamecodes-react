@@ -1,0 +1,33 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Instalar dependencias",
+      "type": "shell",
+      "command": "npm install",
+      "group": "build",
+      "problemMatcher": [],
+      "detail": "Instala todos los modulos de node necesarios para el proyecto"
+    },
+    {
+      "label": "Iniciar servidor de desarrollo",
+      "type": "shell",
+      "command": "npm run dev",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "detail": "Inicia Vite en modo desarrollo (http://localhost:5173)"
+    },
+    {
+      "label": "Build produccion",
+      "type": "shell",
+      "command": "npm run build",
+      "group": "build",
+      "problemMatcher": [],
+      "detail": "Genera la carpeta dist para produccion"
+    }
+  ]
+}

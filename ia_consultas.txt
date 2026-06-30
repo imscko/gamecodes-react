@@ -1,0 +1,7 @@
+Prompt 1 - Estructura de componentes en React (en español):
+
+"Actúa como un experto en desarrollo React. Indícame las mejores prácticas para estructurar componentes funcionales accesibles y reutilizables en una aplicación educativa. Céntrate en: uso de hooks (`useState`, `useEffect`), separación de responsabilidades, comunicación entre componentes mediante `props`, y uso de etiquetas semánticas (`header`, `nav`, `main`, `section`, `footer`). Incluye recomendaciones sobre pruebas unitarias y accesibilidad (labels con `htmlFor`, roles ARIA). Responde de forma concisa y con ejemplos cortos." 
+
+Prompt 2 - Validaciones y seguridad en formularios (en español):
+
+"Actúa como especialista en seguridad web y UX. Proporciona prácticas recomendadas para validar y sanitizar entradas en formularios React en el cliente. Cubre: validación de formatos (email), prevención de XSS en el cliente, almacenamiento seguro de contraseñas (por qué no guardar texto plano), uso del Web Crypto API para hashing en el cliente (ejemplo SHA-256), migración segura desde contraseñas legacy en texto plano, y consideraciones para no confiar únicamente en la validación del cliente. Responde con código ejemplo breve y explicaciones claras."

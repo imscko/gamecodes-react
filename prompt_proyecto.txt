@@ -1,0 +1,93 @@
+Eres un desarrollador senior React/Vite. Crea un proyecto React (Vite + React) completo y listo para ejecutar que implemente la siguiente app educativa y accesible llamada "GameCodes":
+
+- Estructura y scripts: genera `package.json` con scripts `dev`, `build`, `preview` y un `README.md` con instrucciones de instalación y pruebas.
+- Rutas: usa `react-router-dom` con rutas `/`, `/login`, `/registro`, `/contacto`.
+- Persistencia: sincroniza estado con `localStorage` cuando corresponda.
+
+Requisitos funcionales y de código (detallados y obligatorios):
+-Prompt RAIZ
+TRANSFORMA MI PROYECTO DE HTML A REACT + VITE UTILIZANDO JSX en vez de js. 
+
+
+
+1. Componentes y estructura semántica
+- Crea estos componentes en `src/components/`: `Header.jsx`, `Footer.jsx`, `Banner.jsx`, `Carrusel.jsx`, `Bienvenida.jsx`, `Registro.jsx`, `Login.jsx`, `Contacto.jsx`, `Trucos.jsx`, `SobreMi.jsx`, `Redes.jsx`.
+- Usa etiquetas semánticas (`<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`) dentro del JSX donde correspondan.
+- El `Carrusel` en `src/components/Carrusel.jsx` debe:
+  - Ser un componente funcional que use `useState` para el índice actual y `useEffect` para autoplay (con pausa).
+  - Mostrar al menos 3 imágenes, con botones "Anterior" y "Siguiente" que actualizan estado (no manipular el DOM).
+  - Incluir ARIA (`aria-roledescription`, `aria-live`, `aria-hidden` según corresponda).
+2. Formularios controlados y validaciones seguras
+- Implementa tres formularios como componentes controlados (cada input vinculado a `value` + `onChange`):
+  - `Registro.jsx`: formulario de inscripción (usuario, correo, contraseña, confirmar).
+  - `Login.jsx`: inicio de sesión (correo, contraseña).
+  - `Contacto.jsx`: nombre, email, mensaje.
+- En todos los formularios:
+  - Cada `<label>` debe usar `htmlFor` y cada `input/textarea` tener `id`.
+  - Validación de campos obligatorios y formato de email usando expresiones regulares en cliente.
+  - Sanitización básica de entradas para prevenir XSS antes de mostrar o persistir.
+  - Mostrar mensajes de error/éxito con roles `aria-live="assertive"`.
+3. Gestión de estado y modularidad
+- Centraliza la lista de usuarios en `src/App.jsx` como `const [listaUsuarios, setListaUsuarios] = useState(...)` inicializada desde `localStorage`. Sincroniza `listaUsuarios` a `localStorage` con `useEffect`.
+- Exponer handlers desde `App.jsx` y pasarlos por `props`:
+  - `onRegister(nuevoUsuario)` para que `Registro` añada usuarios.
+  - `updateUsuario(usuarioActualizado)` para migraciones/actualizaciones.
+  - `onLogin(nombre)` para que `Login` notifique sesión iniciada.
+- No uses funciones sueltas que modifiquen el DOM; usa props y hooks exclusivamente.
+4. Seguridad de contraseñas / migración
+- NO guardes contraseñas en texto plano. Implementa hashing SHA-256 en el cliente usando la Web Crypto API:
+  - `Registro` debe almacenar `password` como hash hex (SHA-256).
+  - `Login` debe comparar el hash del input con el hash almacenado.
+  - Implementa migración segura: si en `listaUsuarios` hay entradas con password en texto plano, `Login` valida y actualiza la entrada almacenada en `App` usando `updateUsuario`.
+- Indica en comentarios que la validación/almacenamiento definitivo en producción debe hacerse en servidor con sal + hashing fuerte; el cliente solo hace mitigación UX.
+5. Accesibilidad y buenas prácticas
+- Inputs con `autoComplete` apropiado, `required`, `aria-*` donde convenga.
+- Controles del carrusel accesibles mediante teclado.
+- Usar `role`, `aria-label` y `aria-hidden` según sea necesario.
+6. Evidencias IA
+- Genera un archivo `ia_consultas.txt` en la raíz que contenga los prompts usados específicamente para:
+  a) Estructuración y mejores prácticas de componentes React.
+  b) Recomendaciones de seguridad/validación de formularios (explicitar el prompt exacto).
+  
+Prompts IA (exactos) — Incluir tal cual para evidencias:
+
+Prompt 1 - Estructura de componentes en React (en español):
+
+"Actúa como un experto en desarrollo React. Indícame las mejores prácticas para estructurar componentes funcionales accesibles y reutilizables en una aplicación educativa. Céntrate en: uso de hooks (`useState`, `useEffect`), separación de responsabilidades, comunicación entre componentes mediante `props`, y uso de etiquetas semánticas (`header`, `nav`, `main`, `section`, `footer`). Incluye recomendaciones sobre pruebas unitarias y accesibilidad (labels con `htmlFor`, roles ARIA). Responde de forma concisa y con ejemplos cortos."
+
+Prompt 2 - Validaciones y seguridad en formularios (en español):
+
+"Actúa como especialista en seguridad web y UX. Proporciona prácticas recomendadas para validar y sanitizar entradas en formularios React en el cliente. Cubre: validación de formatos (email), prevención de XSS en el cliente, almacenamiento seguro de contraseñas (por qué no guardar texto plano), uso del Web Crypto API para hashing en el cliente (ejemplo SHA-256), migración segura desde contraseñas legacy en texto plano, y consideraciones para no confiar únicamente en la validación del cliente. Responde con código ejemplo breve y explicaciones claras."
+
+Prompt 3 - Animaciones y diseño minimalista:
+
+"Actúa en modo ponytail. Añade un efecto de partículas al banner y animaciones simples al logo usando solo CSS nativo y JS básico. Cero librerías pesadas, la solución más corta y perezosa que funcione."
+
+Prompt 4 - Tienda, Carrito y API externa:
+
+"Actúa en modo ponytail. Integra la API de RAWG para el catálogo de juegos y crea un carrito de compras. Usa fetch nativo y guarda el carrito en localStorage. Mantenlo ultraligero, sin dependencias extra."
+
+Prompt 5 - Panel de Administración:
+
+"Actúa en modo ponytail. Crea un AdminPanel simple para la gestión. Usa el estado que ya tenemos centralizado. Sin sobreingeniería, implementa solo lo estrictamente necesario."
+
+Prompt 6 - Seguridad (Variables de Entorno) y Limpieza de Código:
+
+"Actúa en modo ponytail. Mueve las API keys a un archivo .env y asegúrate de añadirlo a .gitignore. Haz una auditoría para eliminar código muerto, dependencias sin uso y simplificar la lógica. Menos código es mejor."
+
+7. Entrega y tests
+- Entrega el árbol del proyecto y el contenido de los archivos clave (`src/App.jsx`, `src/main.jsx`, `index.html`, `vite.config.js`, `src/components/*`) listados en el README.
+- Añade pruebas unitarias básicas (React Testing Library + Jest o Vitest) para:
+  - Registro: que valida campos y llama a `onRegister` con usuario con `password` en hash.
+  - Login: que llama a `onLogin` cuando credenciales válidas (incluye caso de migración).
+- Asegúrate de que `npm install` y `npm run dev` funcionen en un entorno estándar Node 18+.
+
+Requisitos de entrega del AI:
+- Devuelve un único ZIP o un listado de archivos con su contenido completo y explícito.
+- Incluye ejemplos de uso y comandos en `README.md` (`npm install`, `npm run dev`, `npm test`).
+- Incluye comentarios concisos en el código explicando por qué se eligieron las decisiones de seguridad (hashing, sanitización, migración).
+- No llames a APIs externas ni requieras tokens; todo debe poder ejecutarse localmente.
+
+Resultado esperado: proyecto Vite + React completo, accesible y seguro en la medida posible en cliente, con estado centralizado y modularidad por `props`, `ia_consultas.txt` con prompts, y pruebas básicas.
+
+Fin del prompt.
